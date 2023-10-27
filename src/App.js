@@ -1,7 +1,13 @@
+import Navbar from './components/Navbar';
+import LandingPage from './components/LandingPage';
+import EditorPage from './components/EditorPage';
+
 function App() {
   return (
-    <div className="flex flex-col">
-      <h1 className="text-4xl text-center">Hello World!</h1>
+    <div>
+      <Navbar />
+      <LandingPage />
+      <EditorPage />
     </div>
   );
 }
