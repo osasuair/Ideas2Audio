@@ -1,12 +1,12 @@
 import Navbar from './components/Navbar';
-import LandingPage from './components/LandingPage';
+import HomePage from './components/HomePage';
 import EditorPage from './components/EditorPage';
 
 function App() {
   return (
     <div>
       <Navbar />
-      <LandingPage />
+      <HomePage />
       <EditorPage />
     </div>
   );
