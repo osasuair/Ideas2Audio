@@ -19,8 +19,7 @@ const Songs = () => {
             "name":"Patricia",
             "image": "Image of Patricia"
         }
-    ]
-
+    ]    
     return (
         <div name="songs" className='h-full w-full flex flex-col'>
             <div className='w-full h-20 border-b border-slate-500 self-start top-0 flex flex-col justify-center text-center font-bold'>

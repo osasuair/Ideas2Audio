@@ -17,8 +17,8 @@ class LandingPage extends React.Component {
                             </Link>
                         </div>
                     </div>
-                    <div className='ml-auto rounded-bl-xl flex justify-center items-center'>
-                        <img src={background} alt="background" className='mx-auto rounded-bl-2xl'/>
+                    <div className='ml-auto flex justify-center items-center'>
+                        <img src={background} alt="background" className='mx-auto rounded-2xl'/>
                     </div>
                 </div>
             </div>

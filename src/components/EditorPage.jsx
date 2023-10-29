@@ -29,7 +29,7 @@ const EditorPage = () => {
         <div className='h-20 mx-auto'>
             <Stepper />
         </div>
-        <div className='h-[calc(100vh-12rem)] w-full flex flex-col justify-center px-7 bg-slate-200 shadow-xl rounded-xl'>          
+        <div className='h-[calc(100vh-12rem)] w-full flex flex-col justify-center p-7 bg-slate-200 shadow-xl rounded-xl'>          
           {step(0)}
         </div>
 
