@@ -12,7 +12,7 @@ class LandingPage extends React.Component {
                         <h1 className='text-6xl font-bold pb-4'>AI<br/><span className='bg-gradient-to-r text-transparent bg-clip-text from-red-700 to-orange-500 tracking-wide'>Song Cover</span><br />Generator</h1>
                         <h2 className='text-gray-700 mb-2'>Ideas2Audio is your AI-powered song cover generator. Beautifully designed with customization options, it transforms your musical ideas into unique song covers. Dive into the world of music with Ideas2Audio!</h2>
                         <div className='flex flex-row'>
-                            <Link to='editorPage' smooth duration={500} className='group w-fit px-2 py-1 flex items-center rounded-lg bg-orange-500 hover:bg-orange-600 duration-200 cursor-pointer font-bold'>
+                            <Link to='editorPage' smooth duration={500} className='group w-fit px-2 py-1 flex items-center rounded-lg bg-red-200 hover:bg-red-300 duration-200 cursor-pointer font-bold'>
                                 Start Creating <FaAngleRight size={20} className='group-hover:pl-1 duration-200'/>
                             </Link>
                         </div>
