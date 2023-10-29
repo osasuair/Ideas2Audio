@@ -124,11 +124,13 @@ const Vocals = () => {
 
                 <div className='w-4/12 h-full py-5 flex flex-col items-center'>
                     <h1 className='text-center text-2xl font-bold mb-2'>{selectVoice}</h1>
-                    <div className='bg-slate-300 rounded-xl p-5'>
-                        <img src={profile} alt="profile" className='object-cover rounded-full h-64 '/>
-                    </div>
-                    <div className='pb-2 text-center items-center text-lg font-bold mt-2 text-gray-700'>
-                        <h1>Image of Voice</h1>
+                    <div className='my-auto'>
+                        <div className='bg-slate-300 rounded-xl p-5'>
+                            <img src={profile} alt="profile" className='object-cover rounded-full w-full'/>
+                        </div>
+                        <div className='pb-2 text-center items-center text-lg font-bold mt-2 text-gray-700'>
+                            <h1>Image of Voice</h1>
+                        </div>
                     </div>
                     <button className='w-full h-12 mt-auto bg-purple-300 rounded-lg hover:bg-purple-400 duration-200 cursor-pointer font-bold'>
                         Next Step
