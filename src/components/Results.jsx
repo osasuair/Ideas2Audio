@@ -37,23 +37,26 @@ const Results = () => {
             setTrackIndex(id);
             setCurrentTrack(tracks[id]);
             setIsPlaying(true);
+            console.log("playSong")
             audioRef.current.currentTime = 0;
         }
     }
 
     const playPause = (id) => {
-        return () => {
-            console.log("Made IT")
-            if (trackIndex === id && isPlaying) {
-                setIsPlaying(false);
+        return (e) => {
+            if (trackIndex === id) {
+                setIsPlaying(!isPlaying);
             } else {
                 setTrackIndex(id);
                 setCurrentTrack(tracks[id]);
                 setIsPlaying(true);
                 audioRef.current.currentTime = 0;
             }
+            console.log("playPause")
+            e.stopPropagation();
         }
     }
+
 
     return (
         <div name="results" className='h-full w-full flex flex-col text-white'>
