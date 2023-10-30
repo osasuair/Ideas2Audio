@@ -1,20 +1,57 @@
 import React from 'react'
-import AudioPlayer from './AudioPlayer'
+import { useRef, useState } from 'react'
+
 import { tracks } from '../data/tracks'
+import DisplayTrack from './DisplayTrack'
+import Controls from './Controls'
+import ProgressBar from './ProgressBar'
 
 import { FiPlay, FiPause } from 'react-icons/fi'
 import profile from '../images/profile.png'
 import albumCover from '../images/albumCover.png'
 
 const Results = () => {
-    var selectedSong = 1
-    var selectedVoice = "James"
-    var selectedVoiceGenre = "Rock"
+    const [trackIndex, setTrackIndex] = useState(0);
+    const [timeProgress, setTimeProgress] = useState(0);
+    const [duration, setDuration] = useState(0);
+    const [currentTrack, setCurrentTrack] = useState(tracks[trackIndex]);
+    const [isPlaying, setIsPlaying] = useState(false);
 
-    const playSong = (key) => {
+
+    const audioRef = useRef()
+    const progressBarRef = useRef();
+
+    const handleNext = () => {
+        if (trackIndex >= tracks.length - 1) {
+            setTrackIndex(0);
+            setCurrentTrack(tracks[0]);
+        } else {
+            setTrackIndex((prev) => prev + 1);
+            setCurrentTrack(tracks[trackIndex + 1]);
+        }
+        audioRef.current.currentTime = 0;
+    };
+
+    const playSong = (id) => {
         return () => {
-            console.log(key)
-            selectedSong = key
+            setTrackIndex(id);
+            setCurrentTrack(tracks[id]);
+            setIsPlaying(true);
+            audioRef.current.currentTime = 0;
+        }
+    }
+
+    const playPause = (id) => {
+        return () => {
+            console.log("Made IT")
+            if (trackIndex === id && isPlaying) {
+                setIsPlaying(false);
+            } else {
+                setTrackIndex(id);
+                setCurrentTrack(tracks[id]);
+                setIsPlaying(true);
+                audioRef.current.currentTime = 0;
+            }
         }
     }
 
@@ -40,7 +77,7 @@ const Results = () => {
 
                             {tracks.map(({ id, title, artist, genre }) => (
 
-                                <li key={id} onClick={playSong(id)} className={"flex flex-row hover:bg-gray-600" + ((selectedSong === id) && " bg-slate-900") }>
+                                <li key={id} onClick={playSong(id)} className={"flex flex-row hover:bg-gray-600" + ((trackIndex === id) && " bg-slate-900") }>
                                     <div className="flex items-center flex-1 py-2 px-6 cursor-pointer select-none grow">
                                         <div className="flex flex-col items-center justify-center w-10 h-10 mr-4">
                                             <div className="relative block">
@@ -55,14 +92,14 @@ const Results = () => {
                                                 {artist}
                                             </div>
                                         </div>
-                                        {selectedSong === id ? (
-                                            <span className="flex justify-end text-right">
+                                        {(trackIndex === id)&&isPlaying ? (
+                                            <button onClick={playPause(id)} className="flex justify-end text-right">
                                                 <FiPause size={20} className='text-white'/>
-                                            </span>
+                                            </button>
                                         ) : (                                        
-                                            <span className="flex justify-end text-right">
+                                            <button onClick={playPause(id)} className="flex justify-end text-right">
                                                 <FiPlay size={20} className='text-white'/>
-                                            </span>
+                                            </button>
                                         )}
                                     </div>
                                 </li>
@@ -72,7 +109,13 @@ const Results = () => {
                         
                         <div className="w-full mt-0 p-2 border-b border-t rounded-b-lg sm:px-6">
                             <div className="mb-3 h-full my-auto flex flex-auto items-center">
-                                <AudioPlayer />
+                                <div name="audio-player" className='flex flex-auto'>
+                                    <div className="flex flex-row gap-4 items-center">
+                                        <DisplayTrack {...{ currentTrack, audioRef, setDuration, progressBarRef, handleNext }} />
+                                        <ProgressBar {...{ progressBarRef, audioRef, timeProgress, duration }} />
+                                        <Controls {...{ audioRef, progressBarRef, duration, setTimeProgress, tracks, trackIndex, setTrackIndex, setCurrentTrack, handleNext, isPlaying, setIsPlaying }} />
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -90,10 +133,10 @@ const Results = () => {
                             </div>
                             <div className="flex-1 mr-16">
                                 <div className="font-medium dark:text-white">
-                                    {selectedVoice}
+                                    Dummy
                                 </div>
                                 <div className="text-sm text-gray-600 dark:text-gray-200">
-                                    {selectedVoiceGenre}
+                                    Genre
                                 </div>
                             </div>
                             <span className="flex justify-end text-right">

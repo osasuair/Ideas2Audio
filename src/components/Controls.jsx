@@ -19,7 +19,7 @@ const Controls = ({ audioRef, progressBarRef, duration, setTimeProgress, tracks,
     const playAnimationRef = useRef();
 
     const togglePlayPause = () => {
-        setIsPlaying((prev) => !prev);
+        setIsPlaying();
     };
 
     const repeat = useCallback(() => {
@@ -41,7 +41,7 @@ const Controls = ({ audioRef, progressBarRef, duration, setTimeProgress, tracks,
             audioRef.current.pause();
         }
         playAnimationRef.current = requestAnimationFrame(repeat);
-    }, [isPlaying, audioRef, repeat]);
+    }, [isPlaying, audioRef, trackIndex, repeat]);
 
     useEffect(() => {
         if (audioRef) {
