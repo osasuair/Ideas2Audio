@@ -1,6 +1,4 @@
 import React from 'react'
-import { useRef, useState } from 'react'
-
 import AudioPlayer from './AudioPlayer'
 import { tracks } from '../data/tracks'
 
@@ -9,9 +7,6 @@ import profile from '../images/profile.png'
 import albumCover from '../images/albumCover.png'
 
 const Results = () => {
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [trackIndex, setTrackIndex] = useState(0);
-
     var selectedSong = 1
     var selectedVoice = "James"
     var selectedVoiceGenre = "Rock"
@@ -43,13 +38,13 @@ const Results = () => {
                         <div className='h-full w-full overflow-auto bg-gray-700'>
                             <ul className="w-full flex flex-col divide-y border-b bg-gray-800">
 
-                            {tracks.map(({ id, title, artist, thumbnail }) => (
+                            {tracks.map(({ id, title, artist, genre }) => (
 
                                 <li key={id} onClick={playSong(id)} className={"flex flex-row hover:bg-gray-600" + ((selectedSong === id) && " bg-slate-900") }>
                                     <div className="flex items-center flex-1 py-2 px-6 cursor-pointer select-none grow">
                                         <div className="flex flex-col items-center justify-center w-10 h-10 mr-4">
                                             <div className="relative block">
-                                                <img alt="profile" src={thumbnail} className="mx-auto object-cover rounded-full h-10 w-10 "/>
+                                                <img alt="profile" src={albumCover} className="mx-auto object-cover rounded-full h-10 w-10 "/>
                                             </div>
                                         </div>
                                         <div className="flex-1 pl-1 mr-16">
