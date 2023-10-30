@@ -1,9 +1,10 @@
 import React from 'react'
+
 // import right angle from fa
 import { BsCheckCircleFill } from 'react-icons/bs'
 import profile from '../images/profile.png'
 
-const Vocals = () => {
+const Vocals = (handleNext) => {
 
     var voices = [
         {
@@ -134,7 +135,7 @@ const Vocals = () => {
                             <h1>Image of Voice</h1>
                         </div>
                     </div>
-                    <button className='w-full h-12 mt-auto bg-purple-300 rounded-lg hover:bg-purple-400 duration-200 cursor-pointer font-bold'>
+                    <button onClick={handleNext.handleNext} className='w-full h-12 mt-auto bg-purple-300 rounded-lg hover:bg-purple-400 duration-200 cursor-pointer font-bold'>
                         Next Step
                     </button>
                 </div>

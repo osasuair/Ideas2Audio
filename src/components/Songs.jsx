@@ -3,7 +3,7 @@ import { BsCheckCircleFill } from 'react-icons/bs'
 import profile from '../images/profile.png'
 import albumCover from '../images/albumCover.png'
 
-const Songs = () => {
+const Songs = (handleNext) => {
 
     var voices = [
         {
@@ -174,7 +174,7 @@ const Songs = () => {
                         ))}
                         </ul>
                     </div>
-                    <button className='w-full h-12 mt-auto py-2 bg-blue-300 rounded-lg hover:bg-blue-400 duration-200 cursor-pointer font-bold'>
+                    <button onClick={handleNext.handleNext} className='w-full h-12 mt-auto py-2 bg-blue-300 rounded-lg hover:bg-blue-400 duration-200 cursor-pointer font-bold'>
                         Next Step
                     </button>
                 </div>
