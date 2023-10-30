@@ -58,11 +58,11 @@ const Songs = () => {
             <div className='w-full h-20 border-b border-slate-500 pb-2 flex flex-col justify-center text-center font-bold'>
                 <h1 className='text-3xl'>Select Songs</h1>
             </div>
-            <div className='w-full h-full flex flex-row gap-14 justify-center'>
-                <div className='flex flex-auto h-full w-8/12 justify-center items-center py-5'>
+            <div className='w-full h-full flex flex-row gap-14 justify-center overflow-auto'>
+                <div className='h-full w-8/12 justify-center items-center py-5'>
             
-                    <div className="flex flex-col h-full w-full mx-auto bg-white rounded-lg shadow dark:bg-gray-800 ">
-                        <div className="w-full flex flex-col px-4 border-b h-14 sm:px-6 justify-center">
+                    <div className="flex flex-col h-full w-full bg-white rounded-lg dark:bg-gray-800 ">
+                        <div className="h-14 w-full flex flex-col px-4 py-2 border-b sm:px-6 justify-center">
                             <h3 className="text-lg font-medium leading-6 text-gray-900 dark:text-white">
                                 Songs Database
                             </h3>
@@ -70,7 +70,38 @@ const Songs = () => {
                                 Songs are sorted by popularity
                             </p>
                         </div>
-                        <div className="w-full px-4 py-2 bg-slate-100 order-3 border-b border-t rounded-lg sm:px-6">
+                        <div className='h-full w-full overflow-auto'>
+                            <ul className="w-full flex flex-col divide-y border-b">
+
+                            {voices.map(({ key, song, artist, genre }) => (
+
+                                <li key={key} className={"flex flex-row hover:bg-slate-100" + (selectedSongs.includes(key) ? " bg-slate-100" : "") }>
+                                    <div className="flex items-center flex-1 py-2 px-6 cursor-pointer select-none grow">
+                                        <div className="flex flex-col items-center justify-center w-10 h-10 mr-4">
+                                            <div className="relative block">
+                                                <img alt="profile" src={albumCover} className="mx-auto object-cover rounded-full h-10 w-10 "/>
+                                            </div>
+                                        </div>
+                                        <div className="flex-1 pl-1 mr-16">
+                                            <div className="font-medium dark:text-white">
+                                                {song}
+                                            </div>
+                                            <div className="text-sm text-gray-600 dark:text-gray-200">
+                                                {artist}
+                                            </div>
+                                        </div>
+                                        {selectedSongs.includes(key) && (
+                                            <span className="flex justify-end w-24 text-right">
+                                                <BsCheckCircleFill size={20} className='text-blue-600'/>
+                                            </span>
+                                        )}
+                                    </div>
+                                </li>
+                            ))}
+                            </ul>
+                        </div>
+                        
+                        <div className="w-full mt-0 px-4 py-2 bg-slate-100 border-b border-t rounded-b-lg sm:px-6">
                             <div className="mb-3 w-96">
                                 <label
                                     htmlFor="formFileMultiple"
@@ -86,48 +117,20 @@ const Songs = () => {
                                 />
                             </div>
                         </div>
-                        <ul className="flex flex-col divide-y h-[22rem] w-full overflow-auto">
 
-                        {voices.map(({ key, song, artist, genre }) => (
-
-                            <li key={key} className={"flex flex-row hover:bg-slate-100" + (selectedSongs.includes(key) ? " bg-slate-100" : "") }>
-                                <div className="flex items-center flex-1 py-2 px-6 cursor-pointer select-none grow">
-                                    <div className="flex flex-col items-center justify-center w-10 h-10 mr-4">
-                                        <div className="relative block">
-                                            <img alt="profile" src={albumCover} className="mx-auto object-cover rounded-full h-10 w-10 "/>
-                                        </div>
-                                    </div>
-                                    <div className="flex-1 pl-1 mr-16">
-                                        <div className="font-medium dark:text-white">
-                                            {song}
-                                        </div>
-                                        <div className="text-sm text-gray-600 dark:text-gray-200">
-                                            {artist}
-                                        </div>
-                                    </div>
-                                    {selectedSongs.includes(key) && (
-                                        <span className="flex justify-end w-24 text-right">
-                                            <BsCheckCircleFill size={20} className='text-blue-600'/>
-                                        </span>
-                                    )}
-                                </div>
-                            </li>
-                        ))}
-                        </ul>
-                        
                     </div>
                 </div>
 
                 <div className='w-4/12 h-full py-5 px-4 flex flex-col items-center'>
                     <h1 className='text-center text-2xl font-bold mb-2'>Selected Voice</h1>
-                    <div className={"flex flex-row bg-slate-300 py-2 px-6 w-full rounded-lg mb-3"}>
+                    <div className={"flex flex-row bg-slate-300 py-2 px-2 w-full rounded-lg mb-3"}>
                         <div className="flex items-center flex-1">
                             <div className="flex flex-col items-center justify-center h-10 mr-4">
                                 <div className="relative block">
                                     <img alt="profile" src={profile} className="mx-auto object-cover rounded-full h-10 w-10 "/>
                                 </div>
                             </div>
-                            <div className="flex-1 pl-1 mr-16">
+                            <div className="flex-1 mr-16">
                                 <div className="font-medium dark:text-white">
                                     {selectedVoice}
                                 </div>
@@ -135,7 +138,7 @@ const Songs = () => {
                                     {selectedVoiceGenre}
                                 </div>
                             </div>
-                            <span className="flex justify-end w-24 text-right">
+                            <span className="flex justify-end text-right">
                                 <BsCheckCircleFill size={20} className='text-green-600'/>
                             </span>
                         </div>

@@ -1,19 +1,234 @@
 import React from 'react'
+import { FiPlay, FiPause } from 'react-icons/fi'
+import profile from '../images/profile.png'
+import albumCover from '../images/albumCover.png'
+import {
+    PlayerProvider,
+    Player as HLPlayer,
+    PlayerSlider,
+    VolumeSlider,
+  } from "headless-audioplayer-react";
+  import {
+    AiFillPauseCircle,
+    AiFillPlayCircle,
+    AiOutlineSound,
+    AiFillSound,
+  } from "react-icons/ai/index";
 
 const Results = () => {
+    var voices = [
+        {
+            "song":"Song1",
+            "artist": "James",
+            "genre": "Rock",
+            "key": 1
+        },
+        {
+            "song":"Song2",
+            "artist": "John",
+            "genre": "Pop",
+            "key": 2
+        },
+        {
+            "song":"Song3",
+            "artist": "Mary",
+            "genre": "Rock",
+            "key": 3
+        },
+        {
+            "song":"Song4",
+            "artist": "Patricia",
+            "genre": "Country",
+            "key": 4
+        },
+        {
+            "song":"Song4",
+            "artist": "Patricia",
+            "genre": "Country",
+            "key": 5
+        },
+        {
+            "song":"Song4",
+            "artist": "Patricia",
+            "genre": "Country",
+            "key": 6
+        },
+        {
+            "song":"Song4",
+            "artist": "Patricia",
+            "genre": "Country",
+            "key": 7
+        }
+    ]
+    var selectedSong = 1
+    var selectedVoice = "James"
+    var selectedVoiceGenre = "Rock"
+
     return (
-        <div name="results" className='h-full w-full flex flex-col'>
-            <div className='w-full h-20 border-b border-slate-500 self-start top-0 flex flex-col justify-center text-center font-bold'>
-                <h1 className='text-3xl text-green-400'>Results</h1>
+        <div name="results" className='h-full w-full flex flex-col text-white'>
+            <div className='w-full h-20 border-b border-slate-500 pb-2 flex flex-col justify-center text-center font-bold'>
+                <h1 className='text-3xl text-green-500'>Results</h1>
             </div>
-            <div className='h-full w-full grid grid-cols-2'>
-                <div>
-                    <h1>Song Player</h1>
+            <div className='w-full h-full flex flex-row gap-14 justify-center overflow-auto'>
+                <div className='h-full w-8/12 justify-center items-center py-5'>
+            
+                    <div className="flex flex-col h-full w-full bg-gray-800 rounded-lg shadow-lg ">
+                        <div className="h-14 w-full flex flex-col px-4 py-2 border-b sm:px-6 justify-center">
+                            <h3 className="text-lg font-medium leading-6 dark:text-white">
+                                Playlist
+                            </h3>
+                            <p className="max-w-2xl mt-1 text-sm text-gray-400 dark:text-gray-200">
+                                Your Playlist of Cover Songs created by <span className='font-bold text-green-400 italic'>Ideas2Audio</span>
+                            </p>
+                        </div>
+                        <div className='h-full w-full overflow-auto bg-gray-700'>
+                            <ul className="w-full flex flex-col divide-y border-b bg-gray-800">
+
+                            {voices.map(({ key, song, artist, genre }) => (
+
+                                <li key={key} className={"flex flex-row hover:bg-gray-600" + ((selectedSong === key) ? " bg-slate-900" : "") }>
+                                    <div className="flex items-center flex-1 py-2 px-6 cursor-pointer select-none grow">
+                                        <div className="flex flex-col items-center justify-center w-10 h-10 mr-4">
+                                            <div className="relative block">
+                                                <img alt="profile" src={albumCover} className="mx-auto object-cover rounded-full h-10 w-10 "/>
+                                            </div>
+                                        </div>
+                                        <div className="flex-1 pl-1 mr-16">
+                                            <div className="font-medium dark:text-white">
+                                                {song}
+                                            </div>
+                                            <div className="text-sm text-gray-500 dark:text-gray-200">
+                                                {artist}
+                                            </div>
+                                        </div>
+                                        {selectedSong === key && (
+                                            <span className="flex justify-end text-right">
+                                                <FiPause size={20} className='text-white'/>
+                                            </span>
+                                        )}
+                                        {selectedSong !== key && (
+                                            <span className="flex justify-end text-right">
+                                                <FiPlay size={20} className='text-white'/>
+                                            </span>
+                                        )}
+                                    </div>
+                                </li>
+                            ))}
+                            </ul>
+                        </div>
+                        
+                        <div className="w-full mt-0 px-4 py-2 border-b border-t rounded-b-lg sm:px-6 bg-white">
+                            <div className="mb-3">
+                                <PlayerProvider src="/notion.mp3" loop={true}>
+                                    <HLPlayer>
+                                        {(context) => (
+                                        <div className="w-full p-4 shadow-xl ring-1 ring-zinc-900 ring-opacity-10 rounded-md">
+                                            <PlayerSlider
+                                            downloadProgress={context.downloadProgress}
+                                            onChange={context.onSliderChange}
+                                            progress={context.progress}
+                                            />
+                                            <div className="w-full flex justify-between text-zinc-600 mt-1">
+                                            <span>{context.timestamp.current}</span>
+                                            <span>{context.timestamp.total}</span>
+                                            </div>
+                                            <div className="w-full flex-col sm:flex-row gap-y-2 sm:gap-y-0 items-start justify-between flex mt-2 sm:items-center">
+                                            <div className="flex items-center">
+                                                <img src={profile} alt="" className="w-14 h-14" />
+                                                <div className="ml-2">
+                                                <p className="font-semibold">Notion</p>
+                                                <p className="text-zinc-600 text-sm">The Rare Occasions</p>
+                                                </div>
+                                            </div>
+                                            <div className="flex gap-x-2">
+                                                <button onClick={context.togglePlay}>
+                                                {context.isPlaying ? (
+                                                    <AiFillPauseCircle className="w-10 h-10" />
+                                                ) : (
+                                                    <AiFillPlayCircle className="w-10 h-10" />
+                                                )}
+                                                </button>
+                                                <div className="flex gap-x-2 w-24 items-center">
+                                                <button onClick={context.toggleMute}>
+                                                    {context.mute.state === "muted" ? (
+                                                    <AiOutlineSound className="w-5 h-5" />
+                                                    ) : (
+                                                    <AiFillSound className="w-5 h-5" />
+                                                    )}
+                                                </button>
+                                                <VolumeSlider
+                                                    volume={context.volume}
+                                                    onChange={context.onSliderVolumeChange}
+                                                />
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        )}
+                                    </HLPlayer>
+                                </PlayerProvider>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-                <div>
-                    <h1 className='text-center text-2xl font-bold'>Export</h1>
-                    <h1>Song cover images</h1>
-                    <h1>James - song name</h1>
+
+                <div className='w-4/12 h-full py-5 px-4 flex flex-col items-center'>
+                    <h1 className='text-center text-2xl font-bold mb-2'>Export Playlist</h1>
+                    <div className={"flex flex-row bg-slate-300 py-2 px-2 w-full rounded-lg mb-3"}>
+                        <div className="flex items-center flex-1">
+                            <div className="flex flex-col items-center justify-center h-10 mr-4">
+                                <div className="relative block">
+                                    <img alt="profile" src={profile} className="mx-auto object-cover rounded-full h-10 w-10 "/>
+                                </div>
+                            </div>
+                            <div className="flex-1 mr-16">
+                                <div className="font-medium dark:text-white">
+                                    {selectedVoice}
+                                </div>
+                                <div className="text-sm text-gray-600 dark:text-gray-200">
+                                    {selectedVoiceGenre}
+                                </div>
+                            </div>
+                            <span className="flex justify-end text-right">
+                                <FiPause size={20} className='text-green-600'/>
+                            </span>
+                        </div>
+                    </div>
+
+                    <h1 className='text-center text-2xl font-bold mb-1'>Selected Songs</h1>
+                    {/* <div className='bg-slate-300 rounded-xl p-3 h-full w-full mb-5'>
+                        <ul className="flex flex-col divide-y min-w-full overflow-auto rounded-lg">
+
+                        {selectedSongs.map((songKey) => (
+
+                            <li key={songKey} className="flex flex-row bg-slate-100 w-full">
+                                <div className="w-full flex items-center flex-1 py-1 px-3 ">
+                                    <div className="flex flex-col items-center justify-center mr-4">
+                                        <div className="relative block">
+                                            <img alt="profile" src={albumCover} className="mx-auto object-cover rounded-full h-5 w-5 "/>
+                                        </div>
+                                    </div>
+                                    <div className="flex-1">
+                                        <span className="font-medium text-sm dark:text-white">
+                                            {voices.find((song) => song.key === songKey).song}
+                                        </span>
+                                        <p className='inline'> - </p>
+                                        <span className="text-sm text-gray-600 dark:text-gray-200">
+                                        {voices.find((song) => song.key === songKey).artist}
+                                        </span>
+                                    </div>
+                                    <button className="flex justify-end ml-auto">
+                                        <BsCheckCircleFill size={20} className='text-blue-600'/>
+                                    </button>
+                                </div>
+                            </li>
+                        ))}
+                        </ul>
+                    </div> */}
+                    <button className='w-full h-12 mt-auto py-2 bg-blue-300 rounded-lg hover:bg-blue-400 duration-200 cursor-pointer font-bold'>
+                        Next Step
+                    </button>
                 </div>
             </div>
         </div>

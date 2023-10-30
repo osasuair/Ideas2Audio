@@ -62,11 +62,11 @@ const Vocals = () => {
             <div className='w-full h-20 border-b border-slate-500 pb-2 flex flex-col justify-center text-center font-bold'>
                 <h1 className='text-3xl'>Select a Voice Model</h1>
             </div>
-            <div className='w-full h-full flex flex-row gap-14 justify-center'>
-                <div className='flex flex-auto h-full w-8/12 justify-center items-center py-5'>
+            <div className='w-full h-full flex flex-row gap-14 justify-center overflow-auto'>
+                <div className='h-full w-8/12 justify-center items-center py-5'>
             
-                    <div className="flex flex-col h-full w-full mx-auto bg-white rounded-lg shadow dark:bg-gray-800 ">
-                        <div className="w-full px-4 py-5 border-b h-20 sm:px-6">
+                    <div className="flex flex-col h-full w-full bg-white rounded-lg dark:bg-gray-800 ">
+                        <div className="h-16 w-full flex flex-col px-2 py-2 border-b sm:px-6">
                             <h3 className="text-lg font-medium leading-6 text-gray-900 dark:text-white">
                                 Voice Model Database
                             </h3>
@@ -74,23 +74,8 @@ const Vocals = () => {
                                 Voices are sorted by popularity
                             </p>
                         </div>
-                        <div className="w-full px-4 py-2 bg-slate-100 order-3 border-b border-t rounded-lg sm:px-6">
-                            <div className="mb-3 w-96">
-                                <label
-                                    htmlFor="formFileMultiple"
-                                    className="mb-2 inline-block text-neutral-700 dark:text-neutral-200"
-                                >
-                                Add a Voice Model (File types: .vc)
-                                </label>
-                                <input
-                                    className="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:file:bg-neutral-700 dark:file:text-neutral-100 dark:focus:border-primary"
-                                    type="file"
-                                    accept='.vc'
-                                    id="formFile"
-                                />
-                            </div>
-                        </div>
-                        <ul className="flex flex-col divide-y h-[21rem] w-full overflow-auto">
+                        <div className='h-full w-full overflow-auto'>
+                            <ul className="flex flex-col divide-y h-full w-full">
 
                         {voices.map(({ name, image }) => (
 
@@ -117,7 +102,24 @@ const Vocals = () => {
                                 </div>
                             </li>
                         ))}
-                        </ul>
+                            </ul>
+                        </div>
+                        <div className="w-full px-4 py-2 bg-slate-100 border-b border-t rounded-lg sm:px-6">
+                            <div className="mb-3 w-96">
+                                <label
+                                    htmlFor="formFileMultiple"
+                                    className="mb-2 inline-block text-neutral-700 dark:text-neutral-200"
+                                >
+                                Add a Voice Model (File types: .vc)
+                                </label>
+                                <input
+                                    className="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:file:bg-neutral-700 dark:file:text-neutral-100 dark:focus:border-primary"
+                                    type="file"
+                                    accept='.vc'
+                                    id="formFile"
+                                />
+                            </div>
+                        </div>
                         
                     </div>
                 </div>
