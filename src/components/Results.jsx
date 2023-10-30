@@ -1,58 +1,27 @@
 import React from 'react'
+import { useRef, useState } from 'react'
+
 import AudioPlayer from './AudioPlayer'
+import { tracks } from '../data/tracks'
 
 import { FiPlay, FiPause } from 'react-icons/fi'
 import profile from '../images/profile.png'
 import albumCover from '../images/albumCover.png'
 
 const Results = () => {
-    var voices = [
-        {
-            "song":"Song1",
-            "artist": "James",
-            "genre": "Rock",
-            "key": 1
-        },
-        {
-            "song":"Song2",
-            "artist": "John",
-            "genre": "Pop",
-            "key": 2
-        },
-        {
-            "song":"Song3",
-            "artist": "Mary",
-            "genre": "Rock",
-            "key": 3
-        },
-        {
-            "song":"Song4",
-            "artist": "Patricia",
-            "genre": "Country",
-            "key": 4
-        },
-        {
-            "song":"Song4",
-            "artist": "Patricia",
-            "genre": "Country",
-            "key": 5
-        },
-        {
-            "song":"Song4",
-            "artist": "Patricia",
-            "genre": "Country",
-            "key": 6
-        },
-        {
-            "song":"Song4",
-            "artist": "Patricia",
-            "genre": "Country",
-            "key": 7
-        }
-    ]
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [trackIndex, setTrackIndex] = useState(0);
+
     var selectedSong = 1
     var selectedVoice = "James"
     var selectedVoiceGenre = "Rock"
+
+    const playSong = (key) => {
+        return () => {
+            console.log(key)
+            selectedSong = key
+        }
+    }
 
     return (
         <div name="results" className='h-full w-full flex flex-col text-white'>
@@ -74,29 +43,28 @@ const Results = () => {
                         <div className='h-full w-full overflow-auto bg-gray-700'>
                             <ul className="w-full flex flex-col divide-y border-b bg-gray-800">
 
-                            {voices.map(({ key, song, artist, genre }) => (
+                            {tracks.map(({ id, title, artist, thumbnail }) => (
 
-                                <li key={key} className={"flex flex-row hover:bg-gray-600" + ((selectedSong === key) ? " bg-slate-900" : "") }>
+                                <li key={id} onClick={playSong(id)} className={"flex flex-row hover:bg-gray-600" + ((selectedSong === id) && " bg-slate-900") }>
                                     <div className="flex items-center flex-1 py-2 px-6 cursor-pointer select-none grow">
                                         <div className="flex flex-col items-center justify-center w-10 h-10 mr-4">
                                             <div className="relative block">
-                                                <img alt="profile" src={albumCover} className="mx-auto object-cover rounded-full h-10 w-10 "/>
+                                                <img alt="profile" src={thumbnail} className="mx-auto object-cover rounded-full h-10 w-10 "/>
                                             </div>
                                         </div>
                                         <div className="flex-1 pl-1 mr-16">
                                             <div className="font-medium dark:text-white">
-                                                {song}
+                                                {title}
                                             </div>
                                             <div className="text-sm text-gray-500 dark:text-gray-200">
                                                 {artist}
                                             </div>
                                         </div>
-                                        {selectedSong === key && (
+                                        {selectedSong === id ? (
                                             <span className="flex justify-end text-right">
                                                 <FiPause size={20} className='text-white'/>
                                             </span>
-                                        )}
-                                        {selectedSong !== key && (
+                                        ) : (                                        
                                             <span className="flex justify-end text-right">
                                                 <FiPlay size={20} className='text-white'/>
                                             </span>
