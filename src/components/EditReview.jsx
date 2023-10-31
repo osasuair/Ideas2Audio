@@ -77,7 +77,7 @@ const SongList = () => {
 const EditReview = () => {
     return (
         <div className='h-full w-full flex'>
-            <div className='w-full'>
+            <div className='w-8/12'>
                 <Tabs>
                     <Tab label="Song List">
                         <SongList />
@@ -87,6 +87,7 @@ const EditReview = () => {
                     </Tab>
                 </Tabs>
             </div>
+            <div className='w-4/12'></div>
         </div>
     );
 };
