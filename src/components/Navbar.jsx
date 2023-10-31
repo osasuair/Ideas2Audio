@@ -1,5 +1,4 @@
 import React from 'react'
-import { FaIcons } from 'react-icons/fa'
 import favicon from '../images/favicon.png'
 
 const Navbar = () => {
