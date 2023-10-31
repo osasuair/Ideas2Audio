@@ -11,17 +11,28 @@ const EditorPage = () => {
   const [stepNumber, setStepNumber] = useState(0);
   
   const [voiceId, selectVoiceId] = useState(0);
-  const [songs, selectSongs] = useState([]);
+  const [songs, setSongs] = useState([]);
   const [results, setResults] = useState([]);
-  
+
   const handleNext = () => {
     setStepNumber(stepNumber + 1)
+  }
+
+  const addSong = (song) => {
+    setSongs([...songs, song])
+  }
+
+  const removeSong = (id) => {
+    console.log(id)
+    console.log()
+    console.log(songs)
+    setSongs(songs.filter(s => s !== id))
   }
 
   let step = (x) => {
     switch (x) {
       case 1:
-        return <Songs {...{handleNext, voiceId, songs, selectSongs}} />;
+        return <Songs {...{handleNext, voiceId, songs, addSong, removeSong}} />;
       case 2:
         return <EditReview {...{handleNext, voiceId, songs, results, setResults}} />;
       case 3:

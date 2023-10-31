@@ -17,6 +17,12 @@ const Vocals = ({handleNext, voiceId, selectVoiceId}) => {
         return voices.filter(voice => voice.id === id)[0]
     }
 
+    const nextClick = () => {
+        if (voiceId !== 0) {
+            handleNext()
+        }
+    }
+
     return (
         <div name="vocals" className='min-h-full w-full flex flex-col'>
             <div className='w-full h-20 border-b border-slate-500 pb-2 flex flex-col justify-center text-center font-bold'>
@@ -94,7 +100,8 @@ const Vocals = ({handleNext, voiceId, selectVoiceId}) => {
                             <h1>{getVoice(voiceId).genre}</h1>
                         </div>
                     </div>
-                    <button onClick={handleNext.handleNext} className='w-full h-12 mt-auto bg-purple-300 rounded-lg hover:bg-purple-400 duration-200 cursor-pointer font-bold'>
+                    {}
+                    <button onClick={nextClick} className='w-full h-12 mt-auto bg-purple-300 rounded-lg hover:bg-purple-400 duration-200 cursor-pointer font-bold'>
                         Next Step
                     </button>
                 </div>
