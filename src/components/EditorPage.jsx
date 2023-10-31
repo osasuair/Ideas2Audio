@@ -9,7 +9,11 @@ import Results from './Results'
 
 const EditorPage = () => {
   const [stepNumber, setStepNumber] = useState(0);
-
+  
+  const [voiceId, selectVoiceId] = useState(0);
+  const [songs, selectSongs] = useState([]);
+  const [results, setResults] = useState([]);
+  
   const handleNext = () => {
     setStepNumber(stepNumber + 1)
   }
@@ -17,13 +21,13 @@ const EditorPage = () => {
   let step = (x) => {
     switch (x) {
       case 1:
-        return <Songs {...{handleNext}} />;
+        return <Songs {...{handleNext, voiceId, songs, selectSongs}} />;
       case 2:
-        return <EditReview {...{handleNext}} />;
+        return <EditReview {...{handleNext, voiceId, songs, results, setResults}} />;
       case 3:
-        return <Results {...{handleNext}} />;
+        return <Results {...{handleNext, results}} />;
       default:
-        return <Vocals {...{handleNext}}  />;
+        return <Vocals {...{handleNext, voiceId, selectVoiceId}}  />;
     }
   }
 

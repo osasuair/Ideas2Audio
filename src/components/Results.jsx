@@ -149,35 +149,7 @@ const Results = () => {
                     </div>
 
                     <h1 className='text-center text-2xl font-bold mb-1'>Selected Songs</h1>
-                    {/* <div className='bg-slate-300 rounded-xl p-3 h-full w-full mb-5'>
-                        <ul className="flex flex-col divide-y min-w-full overflow-auto rounded-lg">
 
-                        {selectedSongs.map((songKey) => (
-
-                            <li key={songKey} className="flex flex-row bg-slate-100 w-full">
-                                <div className="w-full flex items-center flex-1 py-1 px-3 ">
-                                    <div className="flex flex-col items-center justify-center mr-4">
-                                        <div className="relative block">
-                                            <img alt="profile" src={albumCover} className="mx-auto object-cover rounded-full h-5 w-5 "/>
-                                        </div>
-                                    </div>
-                                    <div className="flex-1">
-                                        <span className="font-medium text-sm dark:text-white">
-                                            {voices.find((song) => song.key === songKey).song}
-                                        </span>
-                                        <p className='inline'> - </p>
-                                        <span className="text-sm text-gray-600 dark:text-gray-200">
-                                        {voices.find((song) => song.key === songKey).artist}
-                                        </span>
-                                    </div>
-                                    <button className="flex justify-end ml-auto">
-                                        <BsCheckCircleFill size={20} className='text-blue-600'/>
-                                    </button>
-                                </div>
-                            </li>
-                        ))}
-                        </ul>
-                    </div> */}
                     <button className='w-full h-12 mt-auto py-2 bg-blue-300 rounded-lg hover:bg-blue-400 duration-200 cursor-pointer font-bold'>
                         Next Step
                     </button>
