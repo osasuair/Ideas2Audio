@@ -24,15 +24,17 @@ const categories = [
 const AdvancedSettings = () => {
     return (
         <div>
-            <div className="flex-1 overflow-y-scroll border-r border-gray-300">
-                <Tabs>
-                    {categories.map((category) => (
-                        <Tab label={category.title}>
+            <Tabs>
+                {categories.map((category) => (
+                    <Tab label={category.title}>
+                        <div className="flex-1 overflow-y-scroll border-r border-gray-300">
                             {category.content}
-                        </Tab>
-                    ))}
-                </Tabs>
-            </div>
+                        </div>
+                    </Tab>
+                ))}
+
+            </Tabs>
+
         </div>
     );
 };
