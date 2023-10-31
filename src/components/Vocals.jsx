@@ -1,61 +1,27 @@
 import React from 'react'
+
+import { voices } from '../data/voices'
+
 // import right angle from fa
 import { BsCheckCircleFill } from 'react-icons/bs'
-import profile from '../images/profile.png'
 
-const Vocals = () => {
-
-    var voices = [
-        {
-            "name":"James",
-            "image": "Image of James"
-        },
-        {
-            "name":"John",
-            "image": "Image of John"
-        },
-        {
-            "name":"Mary",
-            "image": "Image of Mary"
-        },
-        {
-            "name":"Patricia",
-            "image": "Image of Patricia"
-        },
-        {
-            "name":"Patricia",
-            "image": "Image of Patricia"
-        },
-        {
-            "name":"Patricia",
-            "image": "Image of Patricia"
-        },
-        {
-            "name":"Patricia",
-            "image": "Image of Patricia"
-        },
-        {
-            "name":"Patricia",
-            "image": "Image of Patricia"
-        },
-        {
-            "name":"Patricia",
-            "image": "Image of Patricia"
-        },
-        {
-            "name":"Patricia",
-            "image": "Image of Patricia"
-        },
-        {
-            "name":"Patricia",
-            "image": "Image of Patricia"
-        },
-        {
-            "name":"Patricia",
-            "image": "Image of Patricia"
+const Vocals = ({handleNext, voiceId, selectVoiceId}) => {
+    
+    const handleClick = (id) => {
+        return () => {
+            selectVoiceId(id)
         }
-    ]
-    var selectVoice = "James"
+    }
+
+    const getVoice = (id) => {
+        return voices.filter(voice => voice.id === id)[0]
+    }
+
+    const nextClick = () => {
+        if (voiceId !== 0) {
+            handleNext()
+        }
+    }
 
     return (
         <div name="vocals" className='min-h-full w-full flex flex-col'>
@@ -75,33 +41,33 @@ const Vocals = () => {
                             </p>
                         </div>
                         <div className='h-full w-full overflow-auto'>
-                            <ul className="flex flex-col divide-y h-full w-full">
+                            <ul className="flex flex-col divide-y w-full border-b">
 
-                        {voices.map(({ name, image }) => (
+                                {voices.map(({ id, name, genre, profile, src }) => id!==0 &&(
 
-                            <li className={"flex flex-row hover:bg-slate-100" + (name===selectVoice ? " bg-slate-100" : "") }>
-                                <div className="flex items-center flex-1 py-4 px-6 cursor-pointer select-none grow">
-                                    <div className="flex flex-col items-center justify-center w-10 h-10 mr-4">
-                                        <div className="relative block">
-                                            <img alt="profile" src={profile} className="mx-auto object-cover rounded-full h-10 w-10 "/>
+                                    <li onClick={handleClick(id)} key={id} className={"flex flex-row hover:bg-slate-100" + (name===voiceId ? " bg-slate-100" : "") }>
+                                        <div className="flex items-center flex-1 py-4 px-6 cursor-pointer select-none grow">
+                                            <div className="flex flex-col items-center justify-center w-10 h-10 mr-4">
+                                                <div className="relative block">
+                                                    <img alt="profile" src={profile} className="mx-auto object-cover rounded-full h-10 w-10 "/>
+                                                </div>
+                                            </div>
+                                            <div className="flex-1 pl-1 mr-16">
+                                                <div className="font-medium dark:text-white">
+                                                    {name}
+                                                </div>
+                                                <div className="text-sm text-gray-600 dark:text-gray-200">
+                                                    {genre}
+                                                </div>
+                                            </div>
+                                            {id === voiceId && (
+                                                <button className="flex justify-end w-24 text-right">
+                                                    <BsCheckCircleFill size={20} className='text-green-600'/>
+                                                </button>
+                                            )}
                                         </div>
-                                    </div>
-                                    <div className="flex-1 pl-1 mr-16">
-                                        <div className="font-medium dark:text-white">
-                                            {name}
-                                        </div>
-                                        <div className="text-sm text-gray-600 dark:text-gray-200">
-                                            Developer
-                                        </div>
-                                    </div>
-                                    {name === selectVoice && (
-                                        <button className="flex justify-end w-24 text-right">
-                                            <BsCheckCircleFill size={20} className='text-green-600'/>
-                                        </button>
-                                    )}
-                                </div>
-                            </li>
-                        ))}
+                                    </li>
+                                ))}
                             </ul>
                         </div>
                         <div className="w-full px-4 py-2 bg-slate-100 border-b border-t rounded-lg sm:px-6">
@@ -125,16 +91,17 @@ const Vocals = () => {
                 </div>
 
                 <div className='w-4/12 h-full py-5 flex flex-col items-center'>
-                    <h1 className='text-center text-2xl font-bold mb-2'>{selectVoice}</h1>
+                    <h1 className='text-center text-2xl font-bold mb-2'>{getVoice(voiceId).name}</h1>
                     <div className='my-auto'>
                         <div className='bg-slate-300 rounded-xl p-5'>
-                            <img src={profile} alt="profile" className='object-cover rounded-full w-full'/>
+                            <img src={getVoice(voiceId).profile} alt="profile" className='object-cover rounded-full w-full'/>
                         </div>
                         <div className='pb-2 text-center items-center text-lg font-bold mt-2 text-gray-700'>
-                            <h1>Image of Voice</h1>
+                            <h1>{getVoice(voiceId).genre}</h1>
                         </div>
                     </div>
-                    <button className='w-full h-12 mt-auto bg-purple-300 rounded-lg hover:bg-purple-400 duration-200 cursor-pointer font-bold'>
+                    {}
+                    <button onClick={nextClick} className='w-full h-12 mt-auto bg-purple-300 rounded-lg hover:bg-purple-400 duration-200 cursor-pointer font-bold'>
                         Next Step
                     </button>
                 </div>

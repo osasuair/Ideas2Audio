@@ -1,57 +1,28 @@
 import React from 'react'
+
+import { voices } from '../data/voices'
+import { songList } from '../data/songs'
+
 import { BsCheckCircleFill } from 'react-icons/bs'
-import profile from '../images/profile.png'
-import albumCover from '../images/albumCover.png'
 
-const Songs = () => {
+const Songs = ({handleNext, voiceId, songs, addSong, removeSong}) => {
+    const voice = voices.find(voice => voice.id === voiceId)
 
-    var voices = [
-        {
-            "song":"Song1",
-            "artist": "James",
-            "genre": "Rock",
-            "key": 1
-        },
-        {
-            "song":"Song2",
-            "artist": "John",
-            "genre": "Pop",
-            "key": 2
-        },
-        {
-            "song":"Song3",
-            "artist": "Mary",
-            "genre": "Rock",
-            "key": 3
-        },
-        {
-            "song":"Song4",
-            "artist": "Patricia",
-            "genre": "Country",
-            "key": 4
-        },
-        {
-            "song":"Song4",
-            "artist": "Patricia",
-            "genre": "Country",
-            "key": 5
-        },
-        {
-            "song":"Song4",
-            "artist": "Patricia",
-            "genre": "Country",
-            "key": 6
-        },
-        {
-            "song":"Song4",
-            "artist": "Patricia",
-            "genre": "Country",
-            "key": 7
+    const nextClick = () => {
+        if (songs.length > 0) {
+            handleNext()
         }
-    ]
-    var selectedSongs = [1, 3]
-    var selectedVoice = "James"
-    var selectedVoiceGenre = "Rock"
+    }
+
+    const handleClick = (id) => {
+        return () => {
+            if (songs.includes(id)) {
+                removeSong(id)
+            } else {
+                addSong(id)
+            }
+        }
+    }
 
     return (
         <div name="songs" className='h-full w-full flex flex-col'>
@@ -73,24 +44,24 @@ const Songs = () => {
                         <div className='h-full w-full overflow-auto'>
                             <ul className="w-full flex flex-col divide-y border-b">
 
-                            {voices.map(({ key, song, artist, genre }) => (
+                            {songList.map(({ id, title, artist, thumbnail }) => (
 
-                                <li key={key} className={"flex flex-row hover:bg-slate-100" + (selectedSongs.includes(key) ? " bg-slate-100" : "") }>
+                                <li key={id} onClick={handleClick(id)} className={"flex flex-row hover:bg-slate-100" + (songs.includes(id) ? " bg-slate-100" : "") }>
                                     <div className="flex items-center flex-1 py-2 px-6 cursor-pointer select-none grow">
                                         <div className="flex flex-col items-center justify-center w-10 h-10 mr-4">
                                             <div className="relative block">
-                                                <img alt="profile" src={albumCover} className="mx-auto object-cover rounded-full h-10 w-10 "/>
+                                                <img alt="profile" src={thumbnail} className="mx-auto object-cover rounded-full h-10 w-10 "/>
                                             </div>
                                         </div>
                                         <div className="flex-1 pl-1 mr-16">
                                             <div className="font-medium dark:text-white">
-                                                {song}
+                                                {title}
                                             </div>
                                             <div className="text-sm text-gray-600 dark:text-gray-200">
                                                 {artist}
                                             </div>
                                         </div>
-                                        {selectedSongs.includes(key) && (
+                                        {songs.includes(id) && (
                                             <span className="flex justify-end w-24 text-right">
                                                 <BsCheckCircleFill size={20} className='text-blue-600'/>
                                             </span>
@@ -127,15 +98,15 @@ const Songs = () => {
                         <div className="flex items-center flex-1">
                             <div className="flex flex-col items-center justify-center h-10 mr-4">
                                 <div className="relative block">
-                                    <img alt="profile" src={profile} className="mx-auto object-cover rounded-full h-10 w-10 "/>
+                                    <img alt="profile" src={voice.profile} className="mx-auto object-cover rounded-full h-10 w-10 "/>
                                 </div>
                             </div>
                             <div className="flex-1 mr-16">
                                 <div className="font-medium dark:text-white">
-                                    {selectedVoice}
+                                    {voice.name}
                                 </div>
                                 <div className="text-sm text-gray-600 dark:text-gray-200">
-                                    {selectedVoiceGenre}
+                                    {voice.genre}
                                 </div>
                             </div>
                             <span className="flex justify-end text-right">
@@ -148,22 +119,22 @@ const Songs = () => {
                     <div className='bg-slate-300 rounded-xl p-3 h-full w-full mb-5'>
                         <ul className="flex flex-col divide-y min-w-full overflow-auto rounded-lg">
 
-                        {selectedSongs.map((songKey) => (
+                        {songs.map((id) => (
 
-                            <li key={songKey} className="flex flex-row bg-slate-100 w-full">
+                            <li key={id} className="flex flex-row bg-slate-100 w-full">
                                 <div className="w-full flex items-center flex-1 py-1 px-3 ">
                                     <div className="flex flex-col items-center justify-center mr-4">
                                         <div className="relative block">
-                                            <img alt="profile" src={albumCover} className="mx-auto object-cover rounded-full h-5 w-5 "/>
+                                            <img alt="profile" src={songList.find((song) => song.id === id).thumbnail} className="mx-auto object-cover rounded-full h-5 w-5 "/>
                                         </div>
                                     </div>
                                     <div className="flex-1">
                                         <span className="font-medium text-sm dark:text-white">
-                                            {voices.find((song) => song.key === songKey).song}
+                                            {songList.find((song) => song.id === id).title}
                                         </span>
                                         <p className='inline'> - </p>
                                         <span className="text-sm text-gray-600 dark:text-gray-200">
-                                        {voices.find((song) => song.key === songKey).artist}
+                                            {songList.find((song) => song.id === id).artist}
                                         </span>
                                     </div>
                                     <button className="flex justify-end ml-auto">
@@ -174,7 +145,7 @@ const Songs = () => {
                         ))}
                         </ul>
                     </div>
-                    <button className='w-full h-12 mt-auto py-2 bg-blue-300 rounded-lg hover:bg-blue-400 duration-200 cursor-pointer font-bold'>
+                    <button onClick={nextClick} className='w-full h-12 mt-auto py-2 bg-blue-300 rounded-lg hover:bg-blue-400 duration-200 cursor-pointer font-bold'>
                         Next Step
                     </button>
                 </div>
