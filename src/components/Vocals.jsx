@@ -107,7 +107,7 @@ const Vocals = ({handleNext, voiceId, selectVoiceId}) => {
                             <h1>{getVoice(voiceId).genre}</h1>
                         </div>
                     </div>
-                    <button onClick={nextClick} className='w-full h-12 mt-auto bg-purple-300 rounded-lg hover:bg-purple-400 duration-200 cursor-pointer font-bold'>
+                    <button onClick={nextClick} className={`w-full h-12 mt-auto  rounded-lg ${voiceId !== 1 ? 'bg-purple-300 hover:bg-purple-400 cursor-pointer': "bg-gray-300 cursor-not-allowed"} duration-200 font-bold `}>
                         Next Step
                     </button>
                 </div>

@@ -153,7 +153,7 @@ const Songs = ({handleNext, voiceId, songs, addSong, removeSong}) => {
                         ))}
                         </ul>
                     </div>
-                    <button onClick={nextClick} className='w-full h-12 mt-auto py-2 bg-blue-300 rounded-lg hover:bg-blue-400 duration-200 cursor-pointer font-bold'>
+                    <button onClick={nextClick} className={`w-full h-12 mt-auto py-2 ${songs.length > 0? 'bg-blue-300 hover:bg-blue-400 cursor-pointer': "bg-gray-300 cursor-not-allowed"} rounded-lg duration-200 font-bold`}>
                         Next Step
                     </button>
                 </div>
