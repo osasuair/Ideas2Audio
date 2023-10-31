@@ -36,7 +36,7 @@ const EditorPage = () => {
       case 2:
         return <EditReview {...{handleNext, voiceId, songs, results, setResults}} />;
       case 3:
-        return <Results {...{handleNext, results}} />;
+        return <Results tracks={results} />;
       default:
         return <Vocals {...{handleNext, voiceId, selectVoiceId}}  />;
     }

@@ -1,6 +1,3 @@
-import audio1 from '../data/track1.mp3'
-import audio2 from '../data/track2.mp3'
-
 import snoozeSZAThumbnail from '../data/snoozeSZAThumbnail.jpg'
 import monacoBadBunnyThumbnail from '../data/monacoBadBunnyThumbnail.jpg'
 import iRememberEverythingZachBryanThumbnail from '../data/iRememberEverythingZachBryanThumbnail.jpg'
@@ -13,7 +10,6 @@ export const songList = [
         artist: "SZA",
         genre: "R&B",
         thumbnail: snoozeSZAThumbnail,
-        src: audio1
     },
     {
         id: 1,
@@ -21,7 +17,6 @@ export const songList = [
         artist: "Bad Bunny",
         genre: "Latin",
         thumbnail: monacoBadBunnyThumbnail,
-        src: audio2
     },
     {
         id: 2,
@@ -29,7 +24,6 @@ export const songList = [
         artist: "Zach Bryan",
         genre: "Country",
         thumbnail: iRememberEverythingZachBryanThumbnail,
-        src: audio1
     },
     {
         id: 3,
@@ -37,6 +31,5 @@ export const songList = [
         artist: "Luke Combs",
         genre: "Country",
         thumbnail: fastCarLukeCombsThumbnail,
-        src: audio2
     }
 ]

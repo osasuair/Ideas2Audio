@@ -12,7 +12,7 @@ const DisplayTrack = ({ currentTrack, audioRef, setDuration, progressBarRef, han
         <div>
             <audio src={currentTrack.src} ref={audioRef} onLoadedMetadata={onLoadedMetadata} onEnded={handleNext} />
             <div className="audio-info flex flex-row items-center">
-                <div className="audio-image">
+                <div className="audio-image mr-2">
                     {currentTrack.thumbnail ? (
                         <img src={currentTrack.thumbnail} alt="audio avatar" className='h-10'/>
                     ) : (
@@ -24,9 +24,8 @@ const DisplayTrack = ({ currentTrack, audioRef, setDuration, progressBarRef, han
                     )}
                 </div>
                 <div className="text">
-                    <p className="title inline">{currentTrack.title}</p>
-                    <p className='inline'> - </p>
-                    <p className='inline'>{currentTrack.artist}</p>
+                    <p className="title font-bold text-sm">{currentTrack.title}</p>
+                    <p className='text-sm text-gray-300'>{currentTrack.artist}</p>
                 </div>
             </div>
         </div>

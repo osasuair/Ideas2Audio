@@ -20,13 +20,13 @@ const ProgressBar = ({ progressBarRef, audioRef, timeProgress, duration }) => {
     };
 
     return (
-        <div className="progress">
-            <span className="time current">{formatTime(timeProgress)}</span>
+        <div className="progress text-sm mx-auto flex flex-row items-center">
+            <span className="time current mr-1">{formatTime(timeProgress)}</span>
             <input type="range" className="range slider" min="0" max="100" defaultValue="0"
                 ref={progressBarRef}
                 onChange={handleProgressChange}
             />
-            <span className="time">{formatTime(duration)}</span>
+            <span className="time ml-1">{formatTime(duration)}</span>
         </div>
     )
 }
