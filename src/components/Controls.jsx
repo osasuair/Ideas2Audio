@@ -105,7 +105,7 @@ const Controls = ({ audioRef, progressBarRef, duration, setTimeProgress, tracks,
                     value={volume} 
                     min={0} 
                     max={100}
-                    className='w-20'
+                    className='w-20 accent-gray-500'
                     onChange={(e) => setVolume(e.target.value)}
                 />
             </div>
