@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState } from 'react'
 
 import { voices } from '../data/voices'
 import { songList } from '../data/songs'
@@ -7,6 +8,7 @@ import { BsCheckCircleFill } from 'react-icons/bs'
 
 const Songs = ({handleNext, voiceId, songs, addSong, removeSong}) => {
     const voice = voices.find(voice => voice.id === voiceId)
+    const [hiddenUpload, setHiddenUpload] = useState(true);
 
     const nextClick = () => {
         if (songs.length > 0) {
@@ -22,6 +24,11 @@ const Songs = ({handleNext, voiceId, songs, addSong, removeSong}) => {
                 addSong(id)
             }
         }
+    }
+
+    const newSong = () => {
+        addSong(0)
+        setHiddenUpload(false);
     }
 
     return (
@@ -44,7 +51,7 @@ const Songs = ({handleNext, voiceId, songs, addSong, removeSong}) => {
                         <div className='h-full w-full overflow-auto'>
                             <ul className="w-full flex flex-col divide-y border-b">
 
-                            {songList.map(({ id, title, artist, thumbnail }) => (
+                            {songList.map(({ id, title, artist, thumbnail }) => (!(id===0 &&hiddenUpload) &&
 
                                 <li key={id} onClick={handleClick(id)} className={"flex flex-row hover:bg-slate-100" + (songs.includes(id) ? " bg-slate-100" : "") }>
                                     <div className="flex items-center flex-1 py-2 px-6 cursor-pointer select-none grow">
@@ -81,6 +88,7 @@ const Songs = ({handleNext, voiceId, songs, addSong, removeSong}) => {
                                 Add a Song (File types: .mp3, .wav)
                                 </label>
                                 <input
+                                    onClick={newSong}
                                     className="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:file:bg-neutral-700 dark:file:text-neutral-100 dark:focus:border-primary"
                                     type="file"
                                     accept='.mp3,.wav'
@@ -137,7 +145,7 @@ const Songs = ({handleNext, voiceId, songs, addSong, removeSong}) => {
                                             {songList.find((song) => song.id === id).artist}
                                         </span>
                                     </div>
-                                    <button className="flex justify-end ml-auto">
+                                    <button onClick={handleClick(id)} className="flex justify-end ml-auto">
                                         <BsCheckCircleFill size={20} className='text-blue-600'/>
                                     </button>
                                 </div>
@@ -145,7 +153,7 @@ const Songs = ({handleNext, voiceId, songs, addSong, removeSong}) => {
                         ))}
                         </ul>
                     </div>
-                    <button onClick={nextClick} className='w-full h-12 mt-auto py-2 bg-blue-300 rounded-lg hover:bg-blue-400 duration-200 cursor-pointer font-bold'>
+                    <button onClick={nextClick} className={`w-full h-12 mt-auto py-2 ${songs.length > 0? 'bg-blue-300 hover:bg-blue-400 cursor-pointer': "bg-gray-300 cursor-not-allowed"} rounded-lg duration-200 font-bold`}>
                         Next Step
                     </button>
                 </div>

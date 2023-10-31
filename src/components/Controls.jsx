@@ -71,40 +71,41 @@ const Controls = ({ audioRef, progressBarRef, duration, setTimeProgress, tracks,
     };
 
     return (
-        <div className="controls-wrapper">
-            <div className="controls">
-            <button onClick={handlePrevious}>
-                <IoPlaySkipBackSharp />
-            </button>
-            <button onClick={skipBackward}>
-                <IoPlayBackSharp />
-            </button>
+        <div className="h-full controls-wrapper ml-auto text-sm flex flex-col items-end justify-end">
+            <div className="controls text-base flex flex-row gap-1">
+                <button onClick={handlePrevious}>
+                    <IoPlaySkipBackSharp />
+                </button>
+                <button onClick={skipBackward}>
+                    <IoPlayBackSharp />
+                </button>
 
-            <button onClick={togglePlayPause}>
-                {isPlaying ? <IoPauseSharp /> : <IoPlaySharp />}
-            </button>
-            <button onClick={skipForward}>
-                <IoPlayForwardSharp />
-            </button>
-            <button onClick={handleNext}>
-                <IoPlaySkipForwardSharp />
-            </button>
+                <button onClick={togglePlayPause}>
+                    {isPlaying ? <IoPauseSharp /> : <IoPlaySharp />}
+                </button>
+                <button onClick={skipForward}>
+                    <IoPlayForwardSharp />
+                </button>
+                <button onClick={handleNext}>
+                    <IoPlaySkipForwardSharp />
+                </button>
             </div>
             <div className="volume">
-            <button onClick={() => setMuteVolume((prev) => !prev)}>
-            {muteVolume || volume < 5 ? (
-                    <IoMdVolumeOff />
-                ) : volume < 40 ? (
-                    <IoMdVolumeLow />
-                ) : (
-                    <IoMdVolumeHigh />
-                )}
-            </button>
+                <button onClick={() => setMuteVolume((prev) => !prev)}>
+                {muteVolume || volume < 5 ? (
+                        <IoMdVolumeOff />
+                    ) : volume < 40 ? (
+                        <IoMdVolumeLow />
+                    ) : (
+                        <IoMdVolumeHigh />
+                    )}
+                </button>
                 <input
                     type="range" 
                     value={volume} 
                     min={0} 
                     max={100}
+                    className='w-20 accent-gray-500'
                     onChange={(e) => setVolume(e.target.value)}
                 />
             </div>

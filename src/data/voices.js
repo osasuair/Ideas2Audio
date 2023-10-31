@@ -8,28 +8,35 @@ import profile from '../data/profile.png'
 
 export const voices = [
     {
-        id: 0,
+        id:0,
+        "name": "Voice Upload",
+        "genre": "Custom",
+        "profile": profile,
+        "src": ""
+    },
+    {
+        id: 1,
         name: 'No Voice Selected',
         genre: 'N/A',
         profile: profile,
         src: ''
     },
     {
-        id: 1,
+        id: 2,
         name: 'Drake',
         genre: 'Rap',
         profile: drakeProfile,
         src: drake
     }, 
     {
-        id: 2,
+        id: 3,
         name: 'Taylor Swift',
         genre: 'Pop',
         profile: taylorSwiftProfile,
         src: taylorSwift
     },
     {
-        id: 3,
+        id: 4,
         name: 'Lil Baby',
         genre: 'Rap',
         profile: lilBabyProfile,

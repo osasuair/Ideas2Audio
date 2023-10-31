@@ -4,6 +4,7 @@ import { Tabs, Tab } from './Tabs';
 import { voices } from '../data/voices';
 import { songList } from '../data/songs';
 import { BsCheckCircleFill } from 'react-icons/bs';
+import { generate } from './GenerateTracks'
 
 
 const SongList = ({ songs }) => {
@@ -50,6 +51,10 @@ const SongList = ({ songs }) => {
 
 const EditReview = ({ handleNext, voiceId, songs, results, setResults }) => {
     const voice = voices.find(voice => voice.id === voiceId);
+    const nextClick = () => {
+        setResults(generate(voiceId, songs, {}))
+        handleNext()
+      }
 
     return (
         <div className='h-full w-full flex-1 justify-items-center'>
@@ -79,7 +84,7 @@ const EditReview = ({ handleNext, voiceId, songs, results, setResults }) => {
                 </div>
             </div>
             <div className="flex-1 h-1/4 justify-items-center">
-                <button className="w-full h-12 mt-auto bg-green-400 rounded-lg hover:bg-purple-400 duration-200 cursor-pointer font-bold">Generate!</button>
+                <button className="w-full h-12 mt-auto bg-green-400 rounded-lg hover:bg-green-500 duration-200 cursor-pointer font-bold" onClick={nextClick}>Generate!</button>
             </div>
         </div>
     );
