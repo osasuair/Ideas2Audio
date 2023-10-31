@@ -163,11 +163,11 @@ const Results = ({tracks}) => {
                         <h1 className='w-full text-center text-2xl font-bold mb-2'> {tracks.length === 1 ? "Add Song to Playlist" : "Export Playlist"}</h1>
                         <ol className='h-full w-full flex flex-col gap-3'>
                             {exports.map(({ id, title, icon, link }) => (
-                                <li key={id} className='w-full h-1/4 flex flex-row items-center'>
+                                <li key={id} className='w-full h-1/4 max-h-25 flex flex-row items-center'>
                                     <a href={link} key={id} target='_blank' rel='noreferrer' className='w-full h-full flex flex-row items-center px-3'>
                                         <button className='w-full h-full bg-gray-800 rounded-lg text-white text-xl font-bold flex flex-row items-center px-2'>
-                                            <div>
-                                                <img src={icon} alt={title} style={{ aspectRatio: 3/2 }} className='h-20 rounded-lg'/>
+                                            <div className='1/6'>
+                                                <img src={icon} alt={title} className='aspect-square max-h-16 rounded-lg'/>
                                             </div>
                                             <p className='pl-2 w-full'>{title}</p>
                                         </button>
@@ -179,9 +179,9 @@ const Results = ({tracks}) => {
                     <div className={"h-1/3 flex flex-col bg-gray-800 py-2 px-2 w-full rounded-lg"}>
                         <h1 className='w-full text-center text-2xl font-bold mb-1'>Download {tracks.length === 1 ? "Song" : "Playlist"}</h1>
                         <a href={tracks.length ===1 ? track1 : playlistZip} download={tracks.length===1 ? snakeCase(tracks[0].title) : "playlist"} target='_blank' rel='noreferrer' className='w-full h-full flex flex-auto items-center px-3'>
-                            <button className='w-full h-20 bg-green-500 rounded-lg text-white text-xl font-bold flex flex-row items-center'>
+                            <button className='w-full h-full max-h-16 bg-green-500 rounded-lg text-white text-xl font-bold flex flex-row items-center'>
                                 <div className='w-55 px-2'>
-                                    <BsDownload size={55} className='text-white mx-auto border-2 border-white rounded-lg px-1 '/>
+                                    <BsDownload size={40} className='text-white mx-auto border-2 border-white rounded-lg px-1 '/>
                                 </div>
                                 <p className='w-full'>Download</p>
                             </button>

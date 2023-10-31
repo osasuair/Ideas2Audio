@@ -35,6 +35,9 @@ const Stepper = ({ stepNumber, setStepNumber }) => {
     
   return (
     <ol className="flex items-center h-10 w-full my-4 px-4 font-medium text-center text-gray-500 text-lg bg-slate-200 rounded-xl shadow-md">
+        <span className='hidden text-blue-500 border-blue-500'></span>
+        <span className='hidden text-green-500 border-green-500'></span>
+        <span className='hidden text-gray-500 border-gray-500'></span>
         {steps.map(({name, extra, step, nospace}) => (
             (step <steps.length-1) ? (
                 <li key={step} onClick={handleClick(step)} className={`flex md:w-full items-center px-2 text-${stepNumber === steps.length-1 ? 'green' : (stepNumber >= step ?'blue':'gray')}-500 ${step < stepNumber && stepNumber !== steps.length-1 && "cursor-pointer hover:shadow"}`}>
