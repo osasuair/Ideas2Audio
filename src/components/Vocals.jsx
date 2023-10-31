@@ -1,24 +1,30 @@
 import React from 'react'
-
+import { useState } from 'react'
 import { voices } from '../data/voices'
 
 // import right angle from fa
 import { BsCheckCircleFill } from 'react-icons/bs'
 
 const Vocals = ({handleNext, voiceId, selectVoiceId}) => {
-    
+    const [hiddenUpload, setHiddenUpload] = useState(true);
+
     const handleClick = (id) => {
         return () => {
             selectVoiceId(id)
         }
     }
 
+    const newVoice = () => {
+        selectVoiceId(0)
+        setHiddenUpload(false);
+    }
+        
     const getVoice = (id) => {
         return voices.filter(voice => voice.id === id)[0]
     }
 
     const nextClick = () => {
-        if (voiceId !== 0) {
+        if (voiceId !== 1) {
             handleNext()
         }
     }
@@ -43,7 +49,7 @@ const Vocals = ({handleNext, voiceId, selectVoiceId}) => {
                         <div className='h-full w-full overflow-auto'>
                             <ul className="flex flex-col divide-y w-full border-b">
 
-                                {voices.map(({ id, name, genre, profile, src }) => id!==0 &&(
+                                {voices.map(({ id, name, genre, profile, src }) => !(id===0 &&hiddenUpload) && id!==1 &&(
 
                                     <li onClick={handleClick(id)} key={id} className={"flex flex-row hover:bg-slate-100" + (name===voiceId ? " bg-slate-100" : "") }>
                                         <div className="flex items-center flex-1 py-4 px-6 cursor-pointer select-none grow">
@@ -79,6 +85,7 @@ const Vocals = ({handleNext, voiceId, selectVoiceId}) => {
                                 Add a Voice Model (File types: .vc)
                                 </label>
                                 <input
+                                    onClick={newVoice}
                                     className="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:file:bg-neutral-700 dark:file:text-neutral-100 dark:focus:border-primary"
                                     type="file"
                                     accept='.vc'
@@ -100,7 +107,6 @@ const Vocals = ({handleNext, voiceId, selectVoiceId}) => {
                             <h1>{getVoice(voiceId).genre}</h1>
                         </div>
                     </div>
-                    {}
                     <button onClick={nextClick} className='w-full h-12 mt-auto bg-purple-300 rounded-lg hover:bg-purple-400 duration-200 cursor-pointer font-bold'>
                         Next Step
                     </button>
