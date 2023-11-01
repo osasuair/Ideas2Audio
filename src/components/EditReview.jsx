@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import AdvancedSettings from './AdvancedSettings';
 import { Tabs, Tab } from './Tabs';
 import { voices } from '../data/voices';
