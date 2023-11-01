@@ -54,10 +54,10 @@ const Stepper = ({ stepNumber, setStepNumber }) => {
                                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
                             </svg>
                         )}
-                        <span className={`hidden ${stepNumber<=step && "sm:inline-flex "+(!nospace && "md:mr-1")}`}>{extra}</span>{name}
+                        <span className={`hidden ${stepNumber<=step && "md:inline-flex "+(!nospace && "md:mr-1")}`}>{extra}</span>{name}
                     </span>
                     <span className={`hidden md:block md:flex-auto md:border-b-2 border-${stepNumber === steps.length-1 ? 'green-500' : (stepNumber > step ?'blue-500':'gray-400')} md:mt-1 transition duration-500 ease-in-out md:px-4 md:ml-2`}  />
-                    <span className={`md:hidden text-${stepNumber === steps.length-1 ? 'green-500' : (stepNumber > step ?'blue-500':'gray-400')}`}>/</span>
+                    <span className={`md:hidden ml-2 text-${stepNumber === steps.length-1 ? 'green-500' : (stepNumber > step ?'blue-500':'gray-400')}`}>/</span>
                 </li>
             ) : (
                 <li key={steps.length-1} className={`flex items-center px-2 text-${stepNumber >= steps.length-1 ? 'green-500' : 'green-800'}`}>
