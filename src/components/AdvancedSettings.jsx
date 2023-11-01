@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-
 import { Tab, Tabs } from './Tabs';
 
-
+/**
+ * Component for advanced settings.
+ * @returns {JSX.Element} JSX element.
+ */
 const AdvancedSettings = () => {
     
     const [voicePitch, setVoicePitch] = useState(0);
@@ -111,7 +113,7 @@ const AdvancedSettings = () => {
                                 value={indexRate}
                                 onChange={(e) => setIndexRate(e.target.value)}
                             />
-    
+
                             <p className='block text-gray-700'>
                                 Controls how much of the AI voice's accent to keep in the vocals
                             </p>

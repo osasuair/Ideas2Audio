@@ -5,24 +5,48 @@ import { voices } from '../data/voices'
 // import right angle from fa
 import { BsCheckCircleFill } from 'react-icons/bs'
 
+/**
+ * Renders a component for selecting a voice model.
+ * @param {Object} props - The component props.
+ * @param {Function} props.handleNext - The function to handle the next step.
+ * @param {number} props.voiceId - The ID of the selected voice model.
+ * @param {Function} props.selectVoiceId - The function to select a voice model.
+ * @returns {JSX.Element} - The rendered component.
+ */
 const Vocals = ({handleNext, voiceId, selectVoiceId}) => {
     const [hiddenUpload, setHiddenUpload] = useState(true);
 
+    /**
+     * Returns a function to handle selecting a voice model.
+     * @param {number} id - The ID of the voice model to select.
+     * @returns {Function} - The function to handle selecting the voice model.
+     */
     const handleClick = (id) => {
         return () => {
             selectVoiceId(id)
         }
     }
 
+    /**
+     * Sets the selected voice model to a new voice model and shows the upload input.
+     */
     const newVoice = () => {
         selectVoiceId(0)
         setHiddenUpload(false);
     }
         
+    /**
+     * Returns the voice model with the specified ID.
+     * @param {number} id - The ID of the voice model to retrieve.
+     * @returns {Object} - The voice model with the specified ID.
+     */
     const getVoice = (id) => {
         return voices.filter(voice => voice.id === id)[0]
     }
 
+    /**
+     * Handles clicking the next button.
+     */
     const nextClick = () => {
         if (voiceId !== 1) {
             handleNext()
@@ -93,7 +117,6 @@ const Vocals = ({handleNext, voiceId, selectVoiceId}) => {
                                 />
                             </div>
                         </div>
-                        
                     </div>
                 </div>
 

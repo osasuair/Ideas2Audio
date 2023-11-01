@@ -3,6 +3,10 @@ import background from '../images/landingPage.jpg'
 import { Link } from 'react-scroll';
 import { FaAngleRight } from 'react-icons/fa';
 
+/**
+ * Renders the landing page component.
+ * @returns {JSX.Element} Landing page component
+ */
 class LandingPage extends React.Component {
     render() {
         return (

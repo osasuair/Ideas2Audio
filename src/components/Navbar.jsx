@@ -1,7 +1,11 @@
 import React from 'react'
 import favicon from '../images/favicon.png'
 
-const Navbar = () => {
+/**
+ * Navbar component that displays the website logo and a "Start Again" button.
+ * @returns {JSX.Element} Navbar component UI.
+ */
+const Navbar = () => { 
   const startAgainClick = () => {
     window.location.reload(false);
   }

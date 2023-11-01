@@ -1,5 +1,12 @@
 import React from 'react'
 
+/**
+ * A stepper component that displays a list of steps and allows the user to navigate between them.
+ * @param {Object} props - The props object that contains the stepNumber and setStepNumber function.
+ * @param {number} props.stepNumber - The current step number.
+ * @param {function} props.setStepNumber - A function to set the current step number.
+ * @returns {JSX.Element} - A JSX element representing the stepper component.
+ */
 const Stepper = ({ stepNumber, setStepNumber }) => {
 
     const steps = [

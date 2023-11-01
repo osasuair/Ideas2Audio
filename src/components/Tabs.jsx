@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 
 // From: https://www.devwares.com/blog/how-to-create-react-tabs-with-tailwind-css/
+/**
+ * A component that renders a tabbed interface.
+ * @param {Object} props - The component props.
+ * @param {Array} props.children - An array of child components representing the tabs.
+ * @returns {JSX.Element} - The rendered component.
+ */
 const Tabs = ({ children }) => {
   const [activeTab, setActiveTab] = useState(children[0].props.label);
 

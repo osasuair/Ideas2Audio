@@ -6,16 +6,33 @@ import { songList } from '../data/songs'
 
 import { BsCheckCircleFill } from 'react-icons/bs'
 
+/**
+ * Renders a component for selecting songs.
+ * @param {Object} props - The component props.
+ * @param {Function} props.handleNext - The function to handle the next step.
+ * @param {number} props.voiceId - The ID of the selected voice.
+ * @param {Array} props.songs - The array of selected songs.
+ * @param {Function} props.addSong - The function to add a song to the selection.
+ * @param {Function} props.removeSong - The function to remove a song from the selection.
+ * @returns {JSX.Element} - The rendered component.
+ */
 const Songs = ({handleNext, voiceId, songs, addSong, removeSong}) => {
     const voice = voices.find(voice => voice.id === voiceId)
     const [hiddenUpload, setHiddenUpload] = useState(true);
 
+    /**
+     * Handles the click event for the "Next" button.
+     */
     const nextClick = () => {
         if (songs.length > 0) {
             handleNext()
         }
     }
 
+    /**
+     * Handles the click event for a song item.
+     * @param {number} id - The ID of the clicked song.
+     */
     const handleClick = (id) => {
         return () => {
             if (songs.includes(id)) {
@@ -26,6 +43,9 @@ const Songs = ({handleNext, voiceId, songs, addSong, removeSong}) => {
         }
     }
 
+    /**
+     * Adds a new song to the selection.
+     */
     const newSong = () => {
         addSong(0)
         setHiddenUpload(false);

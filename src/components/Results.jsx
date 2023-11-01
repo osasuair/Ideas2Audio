@@ -17,6 +17,13 @@ import ProgressBar from './ProgressBar'
 import { FiPlay, FiPause } from 'react-icons/fi'
 import { BsDownload } from 'react-icons/bs'
 
+/**
+ * Results component displays a list of cover songs or a playlist of cover songs
+ * created by Ideas2Audio. It allows the user to play, pause, and skip through the tracks.
+ * @param {Object} props - React props object
+ * @param {Array} props.tracks - Array of track objects containing id, title, artist, and thumbnail properties
+ * @returns {JSX.Element} - React component element
+ */
 const Results = ({tracks}) => {
     const [trackIndex, setTrackIndex] = useState(0);
     const [timeProgress, setTimeProgress] = useState(0);
@@ -24,6 +31,10 @@ const Results = ({tracks}) => {
     const [currentTrack, setCurrentTrack] = useState(tracks[trackIndex]);
     const [isPlaying, setIsPlaying] = useState(false);
 
+    /**
+     * Array of objects containing export service information
+     * @type {Array}
+     */
     const exports = [
         {
             id: 0,
@@ -54,6 +65,9 @@ const Results = ({tracks}) => {
     const audioRef = useRef()
     const progressBarRef = useRef();
 
+    /**
+     * Handles the next track in the playlist
+     */
     const handleNext = () => {
         if (trackIndex >= tracks.length - 1) {
             setTrackIndex(0);
@@ -65,6 +79,11 @@ const Results = ({tracks}) => {
         audioRef.current.currentTime = 0;
     };
 
+    /**
+     * Plays the selected track
+     * @param {number} id - The id of the selected track
+     * @returns {Function} - Returns a function that sets the track index, current track, and isPlaying state
+     */
     const playSong = (id) => {
         return () => {
             setTrackIndex(id);
@@ -75,6 +94,11 @@ const Results = ({tracks}) => {
         }
     }
 
+    /**
+     * Toggles the play/pause state of the selected track
+     * @param {number} id - The id of the selected track
+     * @returns {Function} - Returns a function that toggles the isPlaying state and sets the track index and current track if necessary
+     */
     const playPause = (id) => {
         return (e) => {
             if (trackIndex === id) {
@@ -146,6 +170,7 @@ const Results = ({tracks}) => {
                         <div className="w-full mt-0 p-2 border-b border-t rounded-b-lg sm:px-2">
                             <div className="mb-3 h-full my-auto flex flex-auto items-center">
                                 <div name="audio-player" className='flex flex-auto'>
+                                    {/* Source: https://blog.logrocket.com/building-audio-player-react/ */}
                                     <div className="w-full flex flex-row gap-2 items-center">
                                         <DisplayTrack {...{ currentTrack, audioRef, setDuration, progressBarRef, handleNext }} />
                                         <ProgressBar {...{ progressBarRef, audioRef, timeProgress, duration }} />

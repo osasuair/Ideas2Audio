@@ -5,7 +5,12 @@ import { songList } from '../data/songs';
 import { BsCheckCircleFill } from 'react-icons/bs';
 import { generate } from './GenerateTracks'
 
-
+/**
+ * Renders a list of selected songs.
+ * @param {Object} props - The component props.
+ * @param {Array} props.songs - An array of song IDs to display in the list.
+ * @returns {JSX.Element} - The rendered component.
+ */
 const SongList = ({ songs }) => {
     return (
         <div className="flex flex-col h-full w-full bg-white rounded-lg dark:bg-gray-800 ">
@@ -47,8 +52,17 @@ const SongList = ({ songs }) => {
     );
 };
 
-
-const EditReview = ({ handleNext, voiceId, songs, results, setResults }) => {
+/**
+ * Renders the Edit Review component.
+ * @param {Object} props - The component props.
+ * @param {Function} props.handleNext - A function to handle the next button click.
+ * @param {string} props.voiceId - The ID of the selected voice.
+ * @param {Array} props.songs - An array of song IDs to display in the list.
+ * @param {Array} props.results - An array of generated tracks.
+ * @param {Function} props.setResults - A function to set the generated tracks.
+ * @returns {JSX.Element} - The rendered component.
+ */
+const EditReview = ({ handleNext, voiceId, songs, setResults }) => {
     const voice = voices.find(voice => voice.id === voiceId);
     const nextClick = () => {
         setResults(generate(voiceId, songs, {}))

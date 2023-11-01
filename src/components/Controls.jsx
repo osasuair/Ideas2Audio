@@ -12,16 +12,40 @@ import {
   } from 'react-icons/io5';
   import { IoMdVolumeHigh, IoMdVolumeLow, IoMdVolumeOff } from 'react-icons/io';
 
+/**
+ * Controls component for audio player
+ * @param {Object} props - Component props
+ * @param {Object} props.audioRef - Reference to audio element
+ * @param {Object} props.progressBarRef - Reference to progress bar element
+ * @param {number} props.duration - Duration of the current track
+ * @param {function} props.setTimeProgress - Function to set time progress of the track
+ * @param {Array} props.tracks - Array of tracks
+ * @param {number} props.trackIndex - Index of the current track
+ * @param {function} props.setTrackIndex - Function to set the index of the current track
+ * @param {function} props.setCurrentTrack - Function to set the current track
+ * @param {function} props.handleNext - Function to handle next track
+ * @param {boolean} props.isPlaying - Boolean indicating if the track is playing
+ * @param {function} props.setIsPlaying - Function to set the playing state of the track
+ * @returns {JSX.Element} Controls component JSX
+ */
 const Controls = ({ audioRef, progressBarRef, duration, setTimeProgress, tracks, trackIndex, setTrackIndex, setCurrentTrack, handleNext, isPlaying, setIsPlaying}) => {
     const [volume, setVolume] = useState(60);
     const [muteVolume, setMuteVolume] = useState(false);
 
     const playAnimationRef = useRef();
 
+    /**
+     * Toggles the playing state of the track
+     * @returns {void}
+     */
     const togglePlayPause = () => {
         setIsPlaying((prev) => !prev);
     };
 
+    /**
+     * Repeats the animation frame for the track progress
+     * @returns {void}
+     */
     const repeat = useCallback(() => {
         const currentTime = audioRef.current.currentTime;
         setTimeProgress(currentTime);
@@ -50,14 +74,26 @@ const Controls = ({ audioRef, progressBarRef, duration, setTimeProgress, tracks,
         }
     }, [volume, audioRef, muteVolume]);
 
+    /**
+     * Skips the track forward by 15 seconds
+     * @returns {void}
+     */
     const skipForward = () => {
         audioRef.current.currentTime += 15;
     };
         
+    /**
+     * Skips the track backward by 15 seconds
+     * @returns {void}
+     */
     const skipBackward = () => {
         audioRef.current.currentTime -= 15;
     };
 
+    /**
+     * Handles the previous track
+     * @returns {void}
+     */
     const handlePrevious = () => {
         if (trackIndex === 0) {
             let lastTrackIndex = tracks.length - 1;

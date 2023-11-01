@@ -7,12 +7,15 @@ import Songs from './Songs'
 import EditReview from './EditReview'
 import Results from './Results'
 
+/**
+ * Renders the EditorPage component.
+ * @returns {JSX.Element} The JSX code for the EditorPage component.
+ */
 const EditorPage = () => {
-  const [stepNumber, setStepNumber] = useState(0);
-  
-  const [voiceId, selectVoiceId] = useState(1);
-  const [songs, setSongs] = useState([]);
-  const [results, setResults] = useState([]);
+  const [stepNumber, setStepNumber] = useState(0);  // current step of the editor
+  const [voiceId, selectVoiceId] = useState(1);  // selected voice
+  const [songs, setSongs] = useState([]);  // selected songs
+  const [results, setResults] = useState([]);  // final results
 
   const handleNext = () => {
     setStepNumber(stepNumber + 1)
@@ -23,9 +26,6 @@ const EditorPage = () => {
   }
 
   const removeSong = (id) => {
-    console.log(id)
-    console.log()
-    console.log(songs)
     setSongs(songs.filter(s => s !== id))
   }
 
@@ -34,7 +34,7 @@ const EditorPage = () => {
       case 1:
         return <Songs {...{handleNext, voiceId, songs, addSong, removeSong}} />;
       case 2:
-        return <EditReview {...{handleNext, voiceId, songs, results, setResults}} />;
+        return <EditReview {...{handleNext, voiceId, songs, setResults}} />;
       case 3:
         return <Results tracks={results} />;
       default:

@@ -1,5 +1,14 @@
 import React from 'react'
 
+/**
+ * A progress bar component that displays the current time and duration of an audio file and allows the user to change the playback position.
+ * @param {Object} props - The props object containing the following properties:
+ * @param {Object} props.progressBarRef - The reference to the progress bar input element.
+ * @param {Object} props.audioRef - The reference to the audio element.
+ * @param {number} props.timeProgress - The current time of the audio file in seconds.
+ * @param {number} props.duration - The duration of the audio file in seconds.
+ * @returns {JSX.Element} - A JSX element representing the progress bar component.
+ */
 const ProgressBar = ({ progressBarRef, audioRef, timeProgress, duration }) => {
     const handleProgressChange = () => {
         progressBarRef.value = progressBarRef.current.value;
